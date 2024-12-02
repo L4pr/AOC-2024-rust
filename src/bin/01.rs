@@ -16,7 +16,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     right.sort();
     let mut result = 0;
     for i in 0..left.len() {
-        let mut temp = left[i] - right[i];
+        let temp = left[i] - right[i];
         if temp < 0 {
             result -= temp;
         } else {
