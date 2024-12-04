@@ -29,7 +29,11 @@ pub fn make_grid_int(input: &str) -> Vec<Vec<u32>> {
     let lines: Vec<&str> = input.lines().collect();
     let grid: Vec<Vec<u32>> = lines
         .iter()
-        .map(|line| line.chars().map(|ch| ch as u32 - '0' as u32).collect::<Vec<u32>>())
+        .map(|line| {
+            line.chars()
+                .map(|ch| ch as u32 - '0' as u32)
+                .collect::<Vec<u32>>()
+        })
         .collect();
     grid
 }

@@ -5,24 +5,50 @@ advent_of_code::solution!(2);
 pub fn part_one(input: &str) -> Option<u32> {
     let lines = get_lines(input);
     let mut array = Vec::new();
-    for line in lines {
-        let parts: Vec<&str> = line.split_whitespace().collect();
-        array.push(parts.into_iter().map(|number| number.parse::<i32>().unwrap()).collect::<Vec<i32>>());
-    }
-    let mut result = 0;
-    for i in 0..array.len() {
-        if array[i][0] < array[i][1] {
-            if all_increasing(&array[i]) {
-                result += 1;
-            }
-        } else {
-            if all_decreasing(&array[i]) {
-                result += 1;
-            }
+
+    lines.into_iter().for_each(|line| {
+        array.push(
+            line.split_whitespace()
+                .collect::<Vec<&str>>()
+                .into_iter()
+                .map(|number| number.parse::<i32>().unwrap())
+                .collect::<Vec<i32>>(),
+        )
+    });
+
+    Some(array.into_iter().map(|temp| is_correct(&temp)).sum::<u32>())
+
+    // for line in lines {
+    //     let parts: Vec<&str> = line.split_whitespace().collect();
+    //     array.push(parts.into_iter().map(|number| number.parse::<i32>().unwrap()).collect::<Vec<i32>>());
+    // }
+
+    // let mut result = 0;
+    // for i in 0..array.len() {
+    //     if array[i][0] < array[i][1] {
+    //         if all_increasing(&array[i]) {
+    //             result += 1;
+    //         }
+    //     } else {
+    //         if all_decreasing(&array[i]) {
+    //             result += 1;
+    //         }
+    //     }
+    // }
+    // Some(result)
+}
+
+fn is_correct(input: &Vec<i32>) -> u32 {
+    if input[0] < input[1] {
+        if all_increasing(input) {
+            return 1;
+        }
+    } else {
+        if all_decreasing(input) {
+            return 1;
         }
     }
-
-    Some(result)
+    0
 }
 
 fn all_decreasing(input: &Vec<i32>) -> bool {
@@ -50,7 +76,12 @@ pub fn part_two(input: &str) -> Option<u32> {
     let mut array = Vec::new();
     for line in lines {
         let parts: Vec<&str> = line.split_whitespace().collect();
-        array.push(parts.into_iter().map(|number| number.parse::<i32>().unwrap()).collect::<Vec<i32>>());
+        array.push(
+            parts
+                .into_iter()
+                .map(|number| number.parse::<i32>().unwrap())
+                .collect::<Vec<i32>>(),
+        );
     }
     let mut result = 0;
     for i in 0..array.len() {

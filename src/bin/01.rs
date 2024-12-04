@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use advent_of_code::get_lines;
+use std::collections::HashMap;
 
 advent_of_code::solution!(1);
 
@@ -46,7 +46,7 @@ pub fn part_two(input: &str) -> Option<u32> {
             result += number * transposition_table.get(&number).unwrap();
             continue;
         }
-        let mut current_number = number;
+        let current_number = number;
         let mut current_amount = 0;
         while right[right_index] <= current_number {
             if right[right_index] == current_number {
@@ -56,8 +56,6 @@ pub fn part_two(input: &str) -> Option<u32> {
         }
         transposition_table.insert(current_number, current_amount);
         result += current_number * current_amount;
-        current_number = number;
-        current_amount = 0;
     }
     Some(result as u32)
 }
