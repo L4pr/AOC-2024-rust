@@ -59,10 +59,6 @@ fn try_calculations_rev_part2(current: i64, array: &Vec<i64>, index: usize) -> b
     try_calculations_rev_part2(current - value, array, index - 1)
 }
 
-fn concat_fast(a: i64, b: i64) -> i64 {
-    a * 10i64.pow(b.ilog10() + 1) + b
-}
-
 pub fn part_two(input: &str) -> Option<u64> {
     let lines = get_lines(input);
     let mut result = 0;
