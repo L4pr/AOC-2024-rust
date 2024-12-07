@@ -79,32 +79,76 @@ pub fn part_two(input: &str) -> Option<u32> {
             break;
         }
     }
-    let mut result = 0;
-    for i in 0..grid.len() {
-        for j in 0..grid.len() {
-            if grid[i][j] != '.' {
-                continue;
-            }
-            grid[i][j] = '#';
-            let mut visited: HashSet<(usize, (usize, usize))> = HashSet::new();
-            let mut current_location = start_location;
-            let mut direction: usize = 0;
-            while grid[current_location.0][current_location.1] != '?' {
-                if visited.contains(&(direction, current_location)) {
-                    result += 1;
-                    break;
-                }
-                visited.insert((direction, current_location));
-                let next = move_in_direction(direction, &current_location);
-                if grid[next.0][next.1] == '#' {
-                    direction = (direction + 1) % 4;
-                } else {
-                    current_location = next;
-                }
-            }
-            grid[i][j] = '.';
+
+
+    let mut direction: usize = 0;
+    let mut current_location = start_location;
+    let mut visited: HashSet<(usize, usize)> = HashSet::new();
+    visited.insert(current_location);
+    while grid[current_location.0][current_location.1] != '?' {
+        let next = move_in_direction(direction, &current_location);
+        visited.insert(current_location);
+        if grid[next.0][next.1] == '#' {
+            direction = (direction + 1) % 4;
+        } else {
+            current_location = next;
         }
     }
+    visited.remove(&current_location);
+
+    let mut result = 0;
+
+    for location in visited {
+        if grid[location.0][location.1] != '.' {
+            continue;
+        }
+        grid[location.0][location.1] = '#';
+        let mut visited: HashSet<(usize, (usize, usize))> = HashSet::new();
+        let mut current_location = start_location;
+        let mut direction: usize = 0;
+        while grid[current_location.0][current_location.1] != '?' {
+            if visited.contains(&(direction, current_location)) {
+                result += 1;
+                break;
+            }
+            visited.insert((direction, current_location));
+            let next = move_in_direction(direction, &current_location);
+            if grid[next.0][next.1] == '#' {
+                direction = (direction + 1) % 4;
+            } else {
+                current_location = next;
+            }
+        }
+        grid[location.0][location.1] = '.';
+    }
+
+
+
+    // for i in 0..grid.len() {
+    //     for j in 0..grid.len() {
+    //         if grid[i][j] != '.' {
+    //             continue;
+    //         }
+    //         grid[i][j] = '#';
+    //         let mut visited: HashSet<(usize, (usize, usize))> = HashSet::new();
+    //         let mut current_location = start_location;
+    //         let mut direction: usize = 0;
+    //         while grid[current_location.0][current_location.1] != '?' {
+    //             if visited.contains(&(direction, current_location)) {
+    //                 result += 1;
+    //                 break;
+    //             }
+    //             visited.insert((direction, current_location));
+    //             let next = move_in_direction(direction, &current_location);
+    //             if grid[next.0][next.1] == '#' {
+    //                 direction = (direction + 1) % 4;
+    //             } else {
+    //                 current_location = next;
+    //             }
+    //         }
+    //         grid[i][j] = '.';
+    //     }
+    // }
 
     Some(result as u32)
 }
