@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use advent_of_code::make_grid;
+use std::collections::HashSet;
 use std::thread;
 
 advent_of_code::solution!(6);
@@ -50,16 +50,13 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 fn move_in_direction(direction: usize, current_location: &(usize, usize)) -> (usize, usize) {
-    ((current_location.0 as i32 + DIRECTIONS[direction].0) as usize, (current_location.1 as i32 + DIRECTIONS[direction].1) as usize)
+    (
+        (current_location.0 as i32 + DIRECTIONS[direction].0) as usize,
+        (current_location.1 as i32 + DIRECTIONS[direction].1) as usize,
+    )
 }
 
-const DIRECTIONS: [(i32, i32); 4] = [
-    (-1, 0),
-    (0, 1),
-    (1, 0),
-    (0, -1),
-];
-
+const DIRECTIONS: [(i32, i32); 4] = [(-1, 0), (0, 1), (1, 0), (0, -1)];
 
 // Single Threaded part 2 solution
 // pub fn part_two(input: &str) -> Option<u32> {
@@ -145,7 +142,6 @@ pub fn part_two(input: &str) -> Option<u32> {
         }
     }
 
-
     let mut direction: usize = 0;
     let mut current_location = start_location;
     let mut visited: HashSet<(usize, usize)> = HashSet::new();
@@ -164,7 +160,10 @@ pub fn part_two(input: &str) -> Option<u32> {
     let visited_vec: Vec<_> = visited.into_iter().collect();
     let chunk_size = visited_vec.len() / 12;
 
-    let chunks: Vec<_> = visited_vec.chunks(chunk_size).map(|chunk| chunk.to_vec()).collect();
+    let chunks: Vec<_> = visited_vec
+        .chunks(chunk_size)
+        .map(|chunk| chunk.to_vec())
+        .collect();
 
     let mut handles = Vec::new();
 

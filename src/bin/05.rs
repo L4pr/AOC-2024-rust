@@ -1,6 +1,6 @@
+use advent_of_code::get_lines;
 use std::cmp::Ordering;
 use std::collections::HashMap;
-use advent_of_code::get_lines;
 
 advent_of_code::solution!(5);
 
@@ -16,7 +16,11 @@ pub fn part_one(input: &str) -> Option<u32> {
                 second_part = true;
                 continue;
             }
-            let parts: Vec<u32> = line.split("|").into_iter().map(|s| s.parse::<u32>().unwrap()).collect();
+            let parts: Vec<u32> = line
+                .split("|")
+                .into_iter()
+                .map(|s| s.parse::<u32>().unwrap())
+                .collect();
             if rules.contains_key(&parts[0]) {
                 rules.get_mut(&parts[0]).unwrap().push(parts[1]);
             } else {
@@ -26,7 +30,11 @@ pub fn part_one(input: &str) -> Option<u32> {
             continue;
         }
 
-        let mut numbers: Vec<u32> = line.split(",").into_iter().map(|s| s.parse::<u32>().unwrap()).collect();
+        let mut numbers: Vec<u32> = line
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<u32>().unwrap())
+            .collect();
         let mut numbers_been: Vec<u32> = Vec::new();
         let mut is_correct = true;
         while !numbers.is_empty() {
@@ -35,7 +43,12 @@ pub fn part_one(input: &str) -> Option<u32> {
             if !rules.contains_key(&temp) {
                 continue;
             }
-            if rules.get(&temp).unwrap().iter().any(|x| numbers_been.contains(x)) {
+            if rules
+                .get(&temp)
+                .unwrap()
+                .iter()
+                .any(|x| numbers_been.contains(x))
+            {
                 is_correct = false;
                 break;
             }
@@ -59,7 +72,11 @@ pub fn part_two(input: &str) -> Option<u32> {
                 second_part = true;
                 continue;
             }
-            let parts: Vec<u32> = line.split("|").into_iter().map(|s| s.parse::<u32>().unwrap()).collect();
+            let parts: Vec<u32> = line
+                .split("|")
+                .into_iter()
+                .map(|s| s.parse::<u32>().unwrap())
+                .collect();
             if rules.contains_key(&parts[0]) {
                 rules.get_mut(&parts[0]).unwrap().push(parts[1]);
             } else {
@@ -69,7 +86,11 @@ pub fn part_two(input: &str) -> Option<u32> {
             continue;
         }
 
-        let mut numbers: Vec<u32> = line.split(",").into_iter().map(|s| s.parse::<u32>().unwrap()).collect();
+        let mut numbers: Vec<u32> = line
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<u32>().unwrap())
+            .collect();
         let mut numbers_been: Vec<u32> = Vec::new();
         let mut is_correct = true;
         while !numbers.is_empty() {
@@ -78,7 +99,12 @@ pub fn part_two(input: &str) -> Option<u32> {
             if !rules.contains_key(&temp) {
                 continue;
             }
-            if rules.get(&temp).unwrap().iter().any(|x| numbers_been.contains(x)) {
+            if rules
+                .get(&temp)
+                .unwrap()
+                .iter()
+                .any(|x| numbers_been.contains(x))
+            {
                 is_correct = false;
                 break;
             }
@@ -86,7 +112,11 @@ pub fn part_two(input: &str) -> Option<u32> {
         if is_correct {
             continue;
         }
-        let mut numbers: Vec<u32> = line.split(",").into_iter().map(|s| s.parse::<u32>().unwrap()).collect();
+        let mut numbers: Vec<u32> = line
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<u32>().unwrap())
+            .collect();
 
         numbers.sort_by(|a, b| {
             if a == b {

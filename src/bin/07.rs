@@ -8,7 +8,12 @@ pub fn part_one(input: &str) -> Option<u64> {
     for line in lines {
         let parts: Vec<&str> = line.split(": ").collect();
         let goal = parts[0].parse::<i64>().unwrap();
-        let array: Vec<i64> = parts[1].split_whitespace().collect::<Vec<&str>>().iter().map(|s| s.parse::<i64>().unwrap()).collect();
+        let array: Vec<i64> = parts[1]
+            .split_whitespace()
+            .collect::<Vec<&str>>()
+            .iter()
+            .map(|s| s.parse::<i64>().unwrap())
+            .collect();
         if try_calculations_rev(goal, &array, array.len() - 1) {
             result += goal;
         }
@@ -65,7 +70,12 @@ pub fn part_two(input: &str) -> Option<u64> {
     for line in lines {
         let parts: Vec<&str> = line.split(": ").collect();
         let goal = parts[0].parse::<i64>().unwrap();
-        let array: Vec<i64> = parts[1].split_whitespace().collect::<Vec<&str>>().iter().map(|s| s.parse::<i64>().unwrap()).collect();
+        let array: Vec<i64> = parts[1]
+            .split_whitespace()
+            .collect::<Vec<&str>>()
+            .iter()
+            .map(|s| s.parse::<i64>().unwrap())
+            .collect();
         if try_calculations_rev_part2(goal, &array, array.len() - 1) {
             result += goal;
         }
