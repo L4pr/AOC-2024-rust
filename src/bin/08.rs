@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap};
 use advent_of_code::make_grid;
 
 advent_of_code::solution!(8);
@@ -22,7 +22,7 @@ pub fn part_one(input: &str) -> Option<u32> {
         }
     }
 
-    let mut antinodes: Vec<Vec<u32>> = vec![vec![0; size]; size];
+    let mut antinodes: Vec<u64> = vec![0; size];
 
     for antenna in antennas {
         let array = antenna.1;
@@ -34,16 +34,16 @@ pub fn part_one(input: &str) -> Option<u32> {
                 let a1 = (c1.0 - diff.0, c1.1 - diff.1);
                 let a2 = (c2.0 + diff.0, c2.1 + diff.1);
                 if is_inside(a1, size) {
-                    antinodes[a1.0 as usize][a1.1 as usize] = 1;
+                    antinodes[a1.0 as usize] |= 1 << a1.1;
                 }
                 if is_inside(a2, size) {
-                    antinodes[a2.0 as usize][a2.1 as usize] = 1;
+                    antinodes[a2.0 as usize] |= 1 << a2.1;
                 }
             }
         }
     }
 
-    let result: u32 = antinodes.iter().map(|f| f.iter().sum::<u32>()).sum();
+    let result: u32 = antinodes.iter().map(|f| f.count_ones()).sum();
 
     Some(result)
 }
@@ -78,7 +78,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         }
     }
 
-    let mut antinodes: Vec<Vec<u32>> = vec![vec![0; size]; size];
+    let mut antinodes: Vec<u64> = vec![0; size];
 
     for antenna in antennas {
         let array = antenna.1;
@@ -90,21 +90,21 @@ pub fn part_two(input: &str) -> Option<u32> {
                 let mut a1 = c1;
 
                 while is_inside(a1, size) {
-                    antinodes[a1.0 as usize][a1.1 as usize] = 1;
+                    antinodes[a1.0 as usize] |= 1 << a1.1;
                     a1 = (a1.0 - diff.0, a1.1 - diff.1);
                 }
 
                 let mut a2 = c2;
 
                 while is_inside(a2, size) {
-                    antinodes[a2.0 as usize][a2.1 as usize] = 1;
+                    antinodes[a2.0 as usize] |= 1 << a2.1;
                     a2 = (a2.0 + diff.0, a2.1 + diff.1);
                 }
             }
         }
     }
 
-    let result: u32 = antinodes.iter().map(|f| f.iter().sum::<u32>()).sum();
+    let result: u32 = antinodes.iter().map(|f| f.count_ones()).sum();
 
     Some(result)
 }
