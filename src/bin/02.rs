@@ -43,10 +43,8 @@ fn is_correct(input: &Vec<i32>) -> u32 {
         if all_increasing(input) {
             return 1;
         }
-    } else {
-        if all_decreasing(input) {
-            return 1;
-        }
+    } else if all_decreasing(input) {
+        return 1;
     }
     0
 }
@@ -54,7 +52,7 @@ fn is_correct(input: &Vec<i32>) -> u32 {
 fn all_decreasing(input: &Vec<i32>) -> bool {
     for i in 0..input.len() - 1 {
         let temp = input[i] - input[i + 1];
-        if temp < 1 || temp > 3 {
+        if !(1..=3).contains(&temp) {
             return false;
         }
     }
@@ -64,7 +62,7 @@ fn all_decreasing(input: &Vec<i32>) -> bool {
 fn all_increasing(input: &Vec<i32>) -> bool {
     for i in 0..input.len() - 1 {
         let temp = input[i + 1] - input[i];
-        if temp < 1 || temp > 3 {
+        if !(1..=3).contains(&temp) {
             return false;
         }
     }
@@ -90,11 +88,9 @@ pub fn part_two(input: &str) -> Option<u32> {
                 result += 1;
                 continue;
             }
-        } else {
-            if all_decreasing(&array[i]) {
-                result += 1;
-                continue;
-            }
+        } else if all_decreasing(&array[i]) {
+            result += 1;
+            continue;
         }
         for j in 0..array[i].len() {
             let temp = array[i][j];
@@ -104,11 +100,9 @@ pub fn part_two(input: &str) -> Option<u32> {
                     result += 1;
                     break;
                 }
-            } else {
-                if all_decreasing(&array[i]) {
-                    result += 1;
-                    break;
-                }
+            } else if all_decreasing(&array[i]) {
+                result += 1;
+                break;
             }
             array[i].insert(j, temp);
         }

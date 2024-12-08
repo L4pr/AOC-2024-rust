@@ -12,27 +12,25 @@ pub fn part_one(input: &str) -> Option<u32> {
     let mut rules: HashMap<u32, Vec<u32>> = HashMap::new();
     for line in lines {
         if !second_part {
-            if line == "" {
+            if line.is_empty() {
                 second_part = true;
                 continue;
             }
             let parts: Vec<u32> = line
                 .split("|")
-                .into_iter()
                 .map(|s| s.parse::<u32>().unwrap())
                 .collect();
-            if rules.contains_key(&parts[0]) {
-                rules.get_mut(&parts[0]).unwrap().push(parts[1]);
-            } else {
+            if let std::collections::hash_map::Entry::Vacant(e) = rules.entry(parts[0]) {
                 let temp_vec = vec![parts[1]];
-                rules.insert(parts[0], temp_vec);
+                e.insert(temp_vec);
+            } else {
+                rules.get_mut(&parts[0]).unwrap().push(parts[1]);
             }
             continue;
         }
 
         let mut numbers: Vec<u32> = line
             .split(",")
-            .into_iter()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
         let mut numbers_been: Vec<u32> = Vec::new();
@@ -68,27 +66,25 @@ pub fn part_two(input: &str) -> Option<u32> {
     let mut rules: HashMap<u32, Vec<u32>> = HashMap::new();
     for line in lines {
         if !second_part {
-            if line == "" {
+            if line.is_empty() {
                 second_part = true;
                 continue;
             }
             let parts: Vec<u32> = line
                 .split("|")
-                .into_iter()
                 .map(|s| s.parse::<u32>().unwrap())
                 .collect();
-            if rules.contains_key(&parts[0]) {
-                rules.get_mut(&parts[0]).unwrap().push(parts[1]);
-            } else {
+            if let std::collections::hash_map::Entry::Vacant(e) = rules.entry(parts[0]) {
                 let temp_vec = vec![parts[1]];
-                rules.insert(parts[0], temp_vec);
+                e.insert(temp_vec);
+            } else {
+                rules.get_mut(&parts[0]).unwrap().push(parts[1]);
             }
             continue;
         }
 
         let mut numbers: Vec<u32> = line
             .split(",")
-            .into_iter()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
         let mut numbers_been: Vec<u32> = Vec::new();
@@ -114,7 +110,6 @@ pub fn part_two(input: &str) -> Option<u32> {
         }
         let mut numbers: Vec<u32> = line
             .split(",")
-            .into_iter()
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
 

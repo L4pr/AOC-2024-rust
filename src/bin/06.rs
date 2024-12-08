@@ -158,12 +158,18 @@ pub fn part_two(input: &str) -> Option<u32> {
     visited.remove(&current_location);
 
     let visited_vec: Vec<_> = visited.into_iter().collect();
-    let chunk_size = visited_vec.len() / 12;
+    let cores = 12;
 
-    let chunks: Vec<_> = visited_vec
-        .chunks(chunk_size)
-        .map(|chunk| chunk.to_vec())
-        .collect();
+    let mut chunks: Vec<Vec<(usize, usize)>> = vec![Vec::new(); cores];
+    for i in 0..visited_vec.len() {
+        chunks[i % cores].push(visited_vec[i]);
+    }
+
+    // let chunk_size = visited_vec.len() / cores;
+    // let chunks: Vec<_> = visited_vec
+    //     .chunks(chunk_size)
+    //     .map(|chunk| chunk.to_vec())
+    //     .collect();
 
     let mut handles = Vec::new();
 

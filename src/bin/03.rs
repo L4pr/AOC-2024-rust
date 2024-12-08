@@ -13,17 +13,17 @@ pub fn part_one(input: &str) -> Option<u32> {
         if left_and_right.len() != 2 {
             continue;
         }
-        let left;
-        let right;
+        
+        
 
-        match left_and_right[0].parse::<u32>() {
-            Ok(number) => left = number,
+        let left = match left_and_right[0].parse::<u32>() {
+            Ok(number) => number,
             Err(_e) => continue,
-        }
-        match left_and_right[1].parse::<u32>() {
-            Ok(number) => right = number,
+        };
+        let right = match left_and_right[1].parse::<u32>() {
+            Ok(number) => number,
             Err(_e) => continue,
-        }
+        };
         result += left * right;
     }
 
@@ -40,23 +40,17 @@ pub fn part_two(input: &str) -> Option<u32> {
         let contains_do = part.contains("do()");
         let contains_dont = part.contains("don't()");
         if contains_do && contains_dont {
-            if part
+            add = part
                 .split("do()")
                 .collect::<Vec<&str>>()
                 .last()
                 .unwrap()
-                .len()
-                < part
+                .len() < part
                     .split("don't()")
                     .collect::<Vec<&str>>()
                     .last()
                     .unwrap()
-                    .len()
-            {
-                add = true;
-            } else {
-                add = false;
-            }
+                    .len();
         } else if contains_dont {
             add = false;
         } else if contains_do {
@@ -73,17 +67,17 @@ pub fn part_two(input: &str) -> Option<u32> {
         if left_and_right.len() != 2 {
             continue;
         }
-        let left;
-        let right;
+        
+        
 
-        match left_and_right[0].parse::<u32>() {
-            Ok(number) => left = number,
+        let left = match left_and_right[0].parse::<u32>() {
+            Ok(number) => number,
             Err(_e) => continue,
-        }
-        match left_and_right[1].parse::<u32>() {
-            Ok(number) => right = number,
+        };
+        let right = match left_and_right[1].parse::<u32>() {
+            Ok(number) => number,
             Err(_e) => continue,
-        }
+        };
         result += left * right;
     }
 

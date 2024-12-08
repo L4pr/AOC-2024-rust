@@ -65,10 +65,8 @@ pub fn part_two(input: &str) -> Option<u32> {
     }
     for i in 0..grid.len() {
         for j in 0..grid[0].len() {
-            if grid[i][j] == 'A' {
-                if is_xmas((i as i32, j as i32), &grid) {
-                    result += 1;
-                }
+            if grid[i][j] == 'A' && is_xmas((i as i32, j as i32), &grid) {
+                result += 1;
             }
         }
     }
@@ -94,15 +92,9 @@ fn is_mas(cc: (i32, i32), diagonal: usize, grid: &Vec<Vec<char>>) -> bool {
             return true;
         }
     } else if grid[(cc.0 + MAS_DIRECTIONS[diagonal * 2].0) as usize]
-        [(cc.1 + MAS_DIRECTIONS[diagonal * 2].1) as usize]
-        == 'S'
-    {
-        if grid[(cc.0 + MAS_DIRECTIONS[diagonal * 2 + 1].0) as usize]
-            [(cc.1 + MAS_DIRECTIONS[diagonal * 2 + 1].1) as usize]
-            == 'M'
-        {
-            return true;
-        }
+        [(cc.1 + MAS_DIRECTIONS[diagonal * 2].1) as usize] == 'S' && grid[(cc.0 + MAS_DIRECTIONS[diagonal * 2 + 1].0) as usize]
+            [(cc.1 + MAS_DIRECTIONS[diagonal * 2 + 1].1) as usize] == 'M' {
+        return true;
     }
     false
 }

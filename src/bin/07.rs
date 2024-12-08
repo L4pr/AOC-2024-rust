@@ -26,10 +26,8 @@ fn try_calculations_rev(current: i64, array: &Vec<i64>, index: usize) -> bool {
     if index == 0 {
         return current == value;
     }
-    if current % value == 0 {
-        if try_calculations_rev(current / value, array, index - 1) {
-            return true;
-        }
+    if current % value == 0 && try_calculations_rev(current / value, array, index - 1) {
+        return true;
     }
 
     if value > current {
@@ -44,17 +42,13 @@ fn try_calculations_rev_part2(current: i64, array: &Vec<i64>, index: usize) -> b
     if index == 0 {
         return current == value;
     }
-    if current % value == 0 {
-        if try_calculations_rev_part2(current / value, array, index - 1) {
-            return true;
-        }
+    if current % value == 0 && try_calculations_rev_part2(current / value, array, index - 1) {
+        return true;
     }
 
     let power = 10i64.pow(value.ilog10() + 1);
-    if current % power == value {
-        if try_calculations_rev_part2(current / power, array, index - 1) {
-            return true;
-        }
+    if current % power == value && try_calculations_rev_part2(current / power, array, index - 1) {
+        return true;
     }
 
     if value > current {
