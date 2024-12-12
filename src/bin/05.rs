@@ -16,10 +16,7 @@ pub fn part_one(input: &str) -> Option<u32> {
                 second_part = true;
                 continue;
             }
-            let parts: Vec<u32> = line
-                .split("|")
-                .map(|s| s.parse::<u32>().unwrap())
-                .collect();
+            let parts: Vec<u32> = line.split("|").map(|s| s.parse::<u32>().unwrap()).collect();
             if let std::collections::hash_map::Entry::Vacant(e) = rules.entry(parts[0]) {
                 let temp_vec = vec![parts[1]];
                 e.insert(temp_vec);
@@ -29,10 +26,7 @@ pub fn part_one(input: &str) -> Option<u32> {
             continue;
         }
 
-        let mut numbers: Vec<u32> = line
-            .split(",")
-            .map(|s| s.parse::<u32>().unwrap())
-            .collect();
+        let mut numbers: Vec<u32> = line.split(",").map(|s| s.parse::<u32>().unwrap()).collect();
         let mut numbers_been: Vec<u32> = Vec::new();
         let mut is_correct = true;
         while !numbers.is_empty() {
@@ -70,10 +64,7 @@ pub fn part_two(input: &str) -> Option<u32> {
                 second_part = true;
                 continue;
             }
-            let parts: Vec<u32> = line
-                .split("|")
-                .map(|s| s.parse::<u32>().unwrap())
-                .collect();
+            let parts: Vec<u32> = line.split("|").map(|s| s.parse::<u32>().unwrap()).collect();
             if let std::collections::hash_map::Entry::Vacant(e) = rules.entry(parts[0]) {
                 let temp_vec = vec![parts[1]];
                 e.insert(temp_vec);
@@ -83,10 +74,7 @@ pub fn part_two(input: &str) -> Option<u32> {
             continue;
         }
 
-        let mut numbers: Vec<u32> = line
-            .split(",")
-            .map(|s| s.parse::<u32>().unwrap())
-            .collect();
+        let mut numbers: Vec<u32> = line.split(",").map(|s| s.parse::<u32>().unwrap()).collect();
         let mut numbers_been: Vec<u32> = Vec::new();
         let mut is_correct = true;
         while !numbers.is_empty() {
@@ -108,10 +96,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         if is_correct {
             continue;
         }
-        let mut numbers: Vec<u32> = line
-            .split(",")
-            .map(|s| s.parse::<u32>().unwrap())
-            .collect();
+        let mut numbers: Vec<u32> = line.split(",").map(|s| s.parse::<u32>().unwrap()).collect();
 
         numbers.sort_by(|a, b| {
             if a == b {

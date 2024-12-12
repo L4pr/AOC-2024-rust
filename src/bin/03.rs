@@ -13,8 +13,6 @@ pub fn part_one(input: &str) -> Option<u32> {
         if left_and_right.len() != 2 {
             continue;
         }
-        
-        
 
         let left = match left_and_right[0].parse::<u32>() {
             Ok(number) => number,
@@ -45,7 +43,8 @@ pub fn part_two(input: &str) -> Option<u32> {
                 .collect::<Vec<&str>>()
                 .last()
                 .unwrap()
-                .len() < part
+                .len()
+                < part
                     .split("don't()")
                     .collect::<Vec<&str>>()
                     .last()
@@ -67,8 +66,6 @@ pub fn part_two(input: &str) -> Option<u32> {
         if left_and_right.len() != 2 {
             continue;
         }
-        
-        
 
         let left = match left_and_right[0].parse::<u32>() {
             Ok(number) => number,

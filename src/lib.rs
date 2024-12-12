@@ -1,5 +1,14 @@
 pub mod template;
 
+const DIRECTIONS: [(i32, i32); 4] = [(-1, 0), (0, 1), (1, 0), (0, -1)];
+
+pub fn move_in_direction(direction: usize, current_location: &(i32, i32)) -> (i32, i32) {
+    (
+        current_location.0 + DIRECTIONS[direction].0,
+        current_location.1 + DIRECTIONS[direction].1,
+    )
+}
+
 pub fn gcd(a: u64, b: u64) -> u64 {
     if b == 0 {
         a

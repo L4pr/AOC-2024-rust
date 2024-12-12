@@ -92,8 +92,12 @@ fn is_mas(cc: (i32, i32), diagonal: usize, grid: &Vec<Vec<char>>) -> bool {
             return true;
         }
     } else if grid[(cc.0 + MAS_DIRECTIONS[diagonal * 2].0) as usize]
-        [(cc.1 + MAS_DIRECTIONS[diagonal * 2].1) as usize] == 'S' && grid[(cc.0 + MAS_DIRECTIONS[diagonal * 2 + 1].0) as usize]
-            [(cc.1 + MAS_DIRECTIONS[diagonal * 2 + 1].1) as usize] == 'M' {
+        [(cc.1 + MAS_DIRECTIONS[diagonal * 2].1) as usize]
+        == 'S'
+        && grid[(cc.0 + MAS_DIRECTIONS[diagonal * 2 + 1].0) as usize]
+            [(cc.1 + MAS_DIRECTIONS[diagonal * 2 + 1].1) as usize]
+            == 'M'
+    {
         return true;
     }
     false

@@ -1,5 +1,5 @@
-use std::collections::{HashMap};
 use advent_of_code::make_grid;
+use std::collections::HashMap;
 
 advent_of_code::solution!(8);
 
@@ -14,7 +14,10 @@ pub fn part_one(input: &str) -> Option<u32> {
             let character = grid[i][j];
             if character != '.' {
                 if antennas.contains_key(&character) {
-                    antennas.get_mut(&character).unwrap().push((i as i32, j as i32))
+                    antennas
+                        .get_mut(&character)
+                        .unwrap()
+                        .push((i as i32, j as i32))
                 } else {
                     antennas.insert(character, vec![(i as i32, j as i32)]);
                 }
@@ -58,7 +61,6 @@ fn is_inside(coordinate: (i32, i32), size: usize) -> bool {
     true
 }
 
-
 pub fn part_two(input: &str) -> Option<u32> {
     let grid = make_grid(input);
     let size = grid.len();
@@ -70,7 +72,10 @@ pub fn part_two(input: &str) -> Option<u32> {
             let character = grid[i][j];
             if character != '.' {
                 if antennas.contains_key(&character) {
-                    antennas.get_mut(&character).unwrap().push((i as i32, j as i32))
+                    antennas
+                        .get_mut(&character)
+                        .unwrap()
+                        .push((i as i32, j as i32))
                 } else {
                     antennas.insert(character, vec![(i as i32, j as i32)]);
                 }
