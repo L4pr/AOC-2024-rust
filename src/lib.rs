@@ -62,4 +62,17 @@ pub fn get_area_polygon(corners: Vec<(i32, i32)>) -> u64 {
     ((s1 - s2).abs() / 2) as u64
 }
 
+pub trait CollectVec<T> {
+    fn collect_vec(self) -> Vec<T>;
+}
+
+impl<T, I> CollectVec<T> for I
+where
+    I: Iterator<Item = T>,
+{
+    fn collect_vec(self) -> Vec<T> {
+        self.collect()
+    }
+}
+
 // Use this file to add helper functions and additional modules.
