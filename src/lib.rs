@@ -1,3 +1,6 @@
+use std::cmp::Ordering;
+use std::collections::VecDeque;
+
 pub mod template;
 
 const DIRECTIONS: [(i32, i32); 4] = [(-1, 0), (0, 1), (1, 0), (0, -1)];
@@ -72,6 +75,47 @@ where
 {
     fn collect_vec(self) -> Vec<T> {
         self.collect()
+    }
+}
+
+pub struct PriorityQueue<T, F>
+where
+    F: Fn(&T, &T) -> Ordering,
+{
+    deque: VecDeque<T>,
+    comparator: F,
+}
+
+impl<T, F> PriorityQueue<T, F>
+where
+    F: Fn(&T, &T) -> Ordering,
+{
+    pub fn new(comparator: F) -> Self {
+        Self {
+            deque: VecDeque::new(),
+            comparator,
+        }
+    }
+
+    pub fn push(&mut self, value: T) {
+        let pos = self
+            .deque
+            .iter()
+            .position(|x| (self.comparator)(x, &value) == Ordering::Greater)
+            .unwrap_or(self.deque.len());
+        self.deque.insert(pos, value);
+    }
+
+    pub fn pop(&mut self) -> Option<T> {
+        self.deque.pop_front()
+    }
+
+    pub fn peek(&self) -> Option<&T> {
+        self.deque.front()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.deque.is_empty()
     }
 }
 
