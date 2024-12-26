@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use advent_of_code::get_lines;
+use std::collections::HashSet;
 
 advent_of_code::solution!(14);
 
@@ -19,8 +19,24 @@ pub fn part_one(input: &str) -> Option<u32> {
     let mut quadrants = vec![0; 4];
     for line in lines {
         let split1: Vec<&str> = line.split_whitespace().collect();
-        let coordinates: Vec<i32> = split1[0].split("=").into_iter().last().unwrap().split(",").into_iter().map(|s| s.parse::<i32>().unwrap()).collect();
-        let velocity: Vec<i32> = split1[1].split("=").into_iter().last().unwrap().split(",").into_iter().map(|s| s.parse::<i32>().unwrap()).collect();
+        let coordinates: Vec<i32> = split1[0]
+            .split("=")
+            .into_iter()
+            .last()
+            .unwrap()
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<i32>().unwrap())
+            .collect();
+        let velocity: Vec<i32> = split1[1]
+            .split("=")
+            .into_iter()
+            .last()
+            .unwrap()
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<i32>().unwrap())
+            .collect();
 
         let mut new_x = (coordinates[0] + (velocity[0] * 100)) % max_x;
         let mut new_y = (coordinates[1] + (velocity[1] * 100)) % max_y;
@@ -70,8 +86,24 @@ pub fn part_two(input: &str) -> Option<u32> {
 
     for line in lines {
         let split1: Vec<&str> = line.split_whitespace().collect();
-        let coordinates: Vec<i32> = split1[0].split("=").into_iter().last().unwrap().split(",").into_iter().map(|s| s.parse::<i32>().unwrap()).collect();
-        let velocity: Vec<i32> = split1[1].split("=").into_iter().last().unwrap().split(",").into_iter().map(|s| s.parse::<i32>().unwrap()).collect();
+        let coordinates: Vec<i32> = split1[0]
+            .split("=")
+            .into_iter()
+            .last()
+            .unwrap()
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<i32>().unwrap())
+            .collect();
+        let velocity: Vec<i32> = split1[1]
+            .split("=")
+            .into_iter()
+            .last()
+            .unwrap()
+            .split(",")
+            .into_iter()
+            .map(|s| s.parse::<i32>().unwrap())
+            .collect();
 
         all_coordinates.push(coordinates);
         all_velocities.push(velocity);
@@ -96,7 +128,6 @@ pub fn part_two(input: &str) -> Option<u32> {
         }
     }
 
-
     // print the grid with the christmas tree
     // let mut grid: Vec<Vec<char>> = vec![vec!['.'; max_y as usize]; max_x as usize];
     // for j in 0..all_coordinates.len() {
@@ -111,7 +142,12 @@ pub fn part_two(input: &str) -> Option<u32> {
     Some(result)
 }
 
-fn do_blink(all_coordinates: &mut Vec<Vec<i32>>, all_velocities: &mut Vec<Vec<i32>>, max_x: i32, max_y: i32) {
+fn do_blink(
+    all_coordinates: &mut Vec<Vec<i32>>,
+    all_velocities: &mut Vec<Vec<i32>>,
+    max_x: i32,
+    max_y: i32,
+) {
     for j in 0..all_coordinates.len() {
         let new_x = (all_coordinates[j][0] + (all_velocities[j][0] + max_x)) % max_x;
         all_coordinates[j][0] = new_x;

@@ -25,7 +25,7 @@ pub fn lcm(a: u64, b: u64) -> u64 {
 }
 
 pub fn get_lines(input: &str) -> Vec<&str> {
-    input.lines().collect::<Vec<&str>>()
+    input.lines().collect_vec()
 }
 
 pub fn make_grid(input: &str) -> Vec<Vec<char>> {

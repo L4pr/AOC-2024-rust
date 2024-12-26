@@ -1,5 +1,5 @@
-use std::collections::{HashMap, VecDeque};
 use advent_of_code::{make_grid, move_in_direction, PriorityQueue};
+use std::collections::{HashMap, VecDeque};
 
 advent_of_code::solution!(16);
 
@@ -18,7 +18,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     while !queue.is_empty() {
         let temp = queue.pop().unwrap();
 
-        if grid[temp.0.0 as usize][temp.0.1 as usize] == '#' {
+        if grid[temp.0 .0 as usize][temp.0 .1 as usize] == '#' {
             continue;
         }
         if let Some(value) = location_been.get(&(temp.0, temp.1)) {
@@ -68,7 +68,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     while !queue.is_empty() {
         let temp = queue.pop().unwrap();
 
-        if grid[temp.0.0 as usize][temp.0.1 as usize] == '#' {
+        if grid[temp.0 .0 as usize][temp.0 .1 as usize] == '#' {
             continue;
         }
         if let Some(value) = location_been.get(&(temp.0, temp.1)) {

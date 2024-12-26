@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use advent_of_code::{get_lines, CollectVec};
+use std::collections::HashSet;
 
 advent_of_code::solution!(15);
 
@@ -80,7 +80,6 @@ fn do_move(grid: &mut Vec<Vec<char>>, coordinates: (i32, i32), movement: char) -
     }
 }
 
-
 pub fn part_two(input: &str) -> Option<u32> {
     let lines = get_lines(input);
     let mut grid = Vec::new();
@@ -98,7 +97,7 @@ pub fn part_two(input: &str) -> Option<u32> {
                     '#' => vec!['#', '#'],
                     'O' => vec!['[', ']'],
                     '@' => vec!['@', '.'],
-                    _ => vec!['.', '.']
+                    _ => vec!['.', '.'],
                 };
                 characters.extend(new_chars);
             }
@@ -164,18 +163,27 @@ fn do_move_part2(grid: &mut Vec<Vec<char>>, coordinates: (i32, i32), movement: c
     }
 
     for ib in &boxes_influenced {
-        grid[ib.0.0 as usize][ib.0.1 as usize] = '.';
+        grid[ib.0 .0 as usize][ib.0 .1 as usize] = '.';
     }
 
     for ib in &boxes_influenced {
-        grid[(ib.0.0 + dx) as usize][(ib.0.1 + dy) as usize] = ib.1;
+        grid[(ib.0 .0 + dx) as usize][(ib.0 .1 + dy) as usize] = ib.1;
     }
 
     (new_x, new_y)
 }
 
-fn get_boxes_left_right(grid: &Vec<Vec<char>>, coordinates: (i32, i32), dx: i32, dy: i32, boxes_influenced: &mut HashSet<((i32, i32), char)>) -> bool {
-    boxes_influenced.insert((coordinates, grid[coordinates.0 as usize][coordinates.1 as usize]));
+fn get_boxes_left_right(
+    grid: &Vec<Vec<char>>,
+    coordinates: (i32, i32),
+    dx: i32,
+    dy: i32,
+    boxes_influenced: &mut HashSet<((i32, i32), char)>,
+) -> bool {
+    boxes_influenced.insert((
+        coordinates,
+        grid[coordinates.0 as usize][coordinates.1 as usize],
+    ));
 
     let (new_x, new_y) = (coordinates.0 + dx, coordinates.1 + dy);
     let next_char = grid[new_x as usize][new_y as usize];
@@ -188,8 +196,17 @@ fn get_boxes_left_right(grid: &Vec<Vec<char>>, coordinates: (i32, i32), dx: i32,
     get_boxes_left_right(grid, (new_x, new_y), dx, dy, boxes_influenced)
 }
 
-fn get_boxes_up_down(grid: &mut Vec<Vec<char>>, coordinates: (i32, i32), dx: i32, dy: i32, boxes_influenced: &mut HashSet<((i32, i32), char)>) -> bool {
-    if !boxes_influenced.insert((coordinates, grid[coordinates.0 as usize][coordinates.1 as usize])) {
+fn get_boxes_up_down(
+    grid: &mut Vec<Vec<char>>,
+    coordinates: (i32, i32),
+    dx: i32,
+    dy: i32,
+    boxes_influenced: &mut HashSet<((i32, i32), char)>,
+) -> bool {
+    if !boxes_influenced.insert((
+        coordinates,
+        grid[coordinates.0 as usize][coordinates.1 as usize],
+    )) {
         return true;
     }
 
@@ -202,12 +219,13 @@ fn get_boxes_up_down(grid: &mut Vec<Vec<char>>, coordinates: (i32, i32), dx: i32
         return true;
     }
     return if next_char == ']' {
-        get_boxes_up_down(grid, (new_x, new_y), dx, dy, boxes_influenced) && get_boxes_up_down(grid, (new_x, new_y - 1), dx, dy, boxes_influenced)
+        get_boxes_up_down(grid, (new_x, new_y), dx, dy, boxes_influenced)
+            && get_boxes_up_down(grid, (new_x, new_y - 1), dx, dy, boxes_influenced)
     } else {
-        get_boxes_up_down(grid, (new_x, new_y), dx, dy, boxes_influenced) && get_boxes_up_down(grid, (new_x, new_y + 1), dx, dy, boxes_influenced)
-    }
+        get_boxes_up_down(grid, (new_x, new_y), dx, dy, boxes_influenced)
+            && get_boxes_up_down(grid, (new_x, new_y + 1), dx, dy, boxes_influenced)
+    };
 }
-
 
 #[cfg(test)]
 mod tests {
